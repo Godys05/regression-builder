@@ -1,0 +1,29 @@
+//Abstract files
+@import './abstracts/variables.scss';
+@import './abstracts/mixins.scss';
+@import './abstracts/globals/globals.scss';
+
+//Functions
+@import './abstracts/functions.scss';
+
+//Components
+@import './components/components.scss';
+
+//Pages related files
+@import './pages/home.scss';
+@import './pages/labels.scss';
+@import './pages/datasets.scss';
+
+//main config
+body {
+    background-color: $primary-color;
+    width: 100%;
+    height: 100%;
+}
+
+html {
+    @include font;
+    overflow-x: hidden;
+    margin: 0;
+    padding: 0;
+}

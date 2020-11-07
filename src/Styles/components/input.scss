@@ -1,0 +1,32 @@
+@keyframes input-appear {
+    0% {top: 5%; opacity: 0;}
+    100% {top: 0; opacity: 1;}
+}
+
+input {
+    border: none;
+    background-color: $secondary-color;
+    outline: none;
+    border-radius: 10px;
+    min-height: 10vh;
+    padding-left: 0.5em;
+    color: $font-primary-color;
+    font-size: $font-big-size;
+    caret-color: $accent-color-1;
+    font-weight: 100;
+    box-shadow: 0px 0px 12px 5px rgba(47, 43, 77, 0.3);
+
+    transition: all 0.25s ease-out;
+    &:focus {
+        transform: scale(1.01);
+        background-color: rgba($color: $secondary-color, $alpha: 0.6);
+
+    }
+
+    animation-name: input-appear;
+    animation-duration:1s;
+}
+
+input[type=number]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+}

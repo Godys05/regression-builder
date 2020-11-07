@@ -1,24 +1,35 @@
-import logo from './logo.svg';
-import './App.css';
+/* eslint-disable no-restricted-globals */
+//Styles
+import './Styles/main.scss';
 
-function App() {
+//Import Pages
+import Home from './Pages/home';
+import Labels from './Pages/labels';
+import Datasets from './Pages/datasets';
+
+//Router
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route
+} from 'react-router-dom';
+
+//Third-party libraries
+import {AnimatePresence, motion} from 'framer-motion';
+
+const App = () => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router>
+      <div className="App">
+        <AnimatePresence>
+        <Switch>
+          <Route component={Home} exact path="/"/>
+          <Route component={Labels} exact path="/name-labels"/>
+          <Route component={Datasets} exact path="/datasets"/>
+        </Switch>
+        </AnimatePresence>
+      </div>
+    </Router>
   );
 }
 

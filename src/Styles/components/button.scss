@@ -1,0 +1,62 @@
+@use '../abstracts/functions.scss';
+%button {
+    border: none;
+    text-align: center;
+    min-height: 10vh;
+    min-width: 10vw;
+    font-size: $font-big-size;
+    background-color: $accent-color-1;
+    outline: none;
+    cursor: pointer;
+    font-weight: bold;
+    border-radius: 10px;
+}
+
+%button-outline {
+    background: none;
+    border-style: solid;
+    border-color: $accent-color-1;
+    border-width: 3px;
+    color: $accent-color-1;
+}
+
+.button-large {
+    min-width: 15vw;
+    height: 15vh;
+}
+
+.button-primary-outline {
+    @extend %button;
+    @extend %button-outline;
+    transition: all 0.5s ease-out;
+
+    &:hover {
+        background-color: $accent-color-1;
+        color: $font-secondary-color;
+        box-shadow: 0px 0px 12px rgba(81, 199, 167, 0.3);
+    }
+    &:active {
+        border: none;
+        background-color: rgba($color: $accent-color-1, $alpha: 0.6);
+        color: $font-secondary-color;
+    }
+}
+.button-secondary-outline {
+    @extend %button;
+    @extend %button-outline;
+    color: $accent-color-2;
+    border-color: $accent-color-2;
+    transition: all 0.3s ease-out;
+
+    &:hover {
+        background-color: $accent-color-2;
+        color: $font-secondary-color;
+        box-shadow: 0px 0px 12px rgba($color: $accent-color-2, $alpha: 0.3);
+    }
+    &:active {
+        border: none;
+        background-color: rgba($color: $accent-color-2, $alpha: 0.6);
+        color: $font-secondary-color;
+    }
+}
+

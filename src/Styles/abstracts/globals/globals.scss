@@ -1,0 +1,30 @@
+//Font
+@import './font.scss';
+//Size
+@import './size.scss';
+//Position
+@import './position.scss';
+
+
+.clickable {
+    cursor: pointer;
+}
+
+.next-button {
+    position: fixed;
+    top: 85vh;
+    left: 85vw;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: all 1s ease-out;
+}
+
+.back-button {
+    transition: all 1s ease-out;
+
+    &:hover {
+        position: relative;
+        right: 1%;
+    }
+}

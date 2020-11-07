@@ -1,0 +1,31 @@
+.large {
+    @include font;
+    font-size: $font-large-size;
+
+    @media screen and (max-width: 600px){
+        font-size: $font-large-size-mobile;
+    }
+    font-family: $font-family;
+}
+
+.header {
+    @include font;
+    font-size: $font-header-size;
+}
+
+.subheader {
+    @include font;
+    font-size: $font-subheader-size;
+}
+
+.bold {
+    font-weight: bold;
+}
+
+.light {
+    font-weight: lighter;
+}
+
+.text-center {
+    text-align: center;
+}
