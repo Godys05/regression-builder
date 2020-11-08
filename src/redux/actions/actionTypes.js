@@ -1,0 +1,10 @@
+exports.ADD_X_LABEL = "xLabelAdded";
+exports.ADD_Y_LABEL = "yLabelAdded";
+exports.ADD_X = "xAdded";
+exports.ADD_Y = "yAdded";
+exports.ADD_LINEAL_R = "linealRegressionAdded";
+exports.ADD_QUADRATIC_R = "quadraticRegressionAdded";
+exports.ADD_EXPONENTIAL_R = "exponentialRegressionAdded";
+exports.ADD_LOG_R = "logarithmicRegressionAdded";
+exports.ADD_POWER_R = "powerRegressionAdded";
+exports.ADD_INTERPOLATION_R = "interpolationRegressionAdded";

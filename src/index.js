@@ -3,9 +3,24 @@ import ReactDOM from 'react-dom';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 
+//Redux
+import { combineReducers, createStore } from 'redux'
+import { Provider } from 'react-redux';
+import { datasetReducer, regressionReducer } from './redux/reducer';
+import store from './redux/store';
+
+const reducer = combineReducers({datasetReducer, regressionReducer});
+
+const myStore = createStore(
+  reducer,
+  store,
+  window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__());
+
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <Provider store={myStore} >
+      <App />
+    </Provider>
   </React.StrictMode>,
   document.getElementById('root')
 );

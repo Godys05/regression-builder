@@ -5,7 +5,7 @@ import NavigateFordward from '../Components/NavigateForward';
 
 import { motion } from 'framer-motion';
 
-const home = () => {
+const Home = () => {
     return(
         <motion.div
         initial={{x: 1000, opacity: 0}}
@@ -21,4 +21,4 @@ const home = () => {
     )
 };
 
-export default home;
+export default Home;

@@ -2,11 +2,20 @@
 /* eslint-disable react-hooks/rules-of-hooks */
 import { motion } from 'framer-motion';
 import React, { useEffect, useState, useRef } from 'react';
+import  { useHistory } from 'react-router-dom';
 
-import NavigateForward from '../Components/NavigateForward';
 import NavigateBack from '../Components/NavigateBack';
 
-const datasets = () => {
+import { useDispatch, useSelector } from 'react-redux';
+import { addX, addY } from '../redux/actions/actions';
+
+const Datasets = () => {
+    const history = useHistory();
+    const dispatch = useDispatch();
+
+    const labelX = useSelector(state => state.datasetReducer.labelX);
+    const labelY = useSelector(state => state.datasetReducer.labelY);
+
     const [x, setX] = useState([0]);
     const [y, setY] = useState([0]);
     const lastX = useRef();
@@ -18,6 +27,12 @@ const datasets = () => {
         lastX.current.value = '';
         lastY.current.value = '';
         lastX.current.focus();
+    }
+
+    const handleAddData = () => {
+        dispatch(addX(x));
+        dispatch(addY(y));
+        history.push('/results');
     }
 
     useEffect(() => {
@@ -37,8 +52,8 @@ const datasets = () => {
 
             <div className="flex-center-col">
                 <div className="dataset mid-width">
-                    <p className="subheader text-center">Time</p>
-                    <p className="subheader text-center">Income</p>
+                    <p className="subheader text-center"> {labelX} </p>
+                    <p className="subheader text-center">{labelY}</p>
                     <p></p>
                 </div>
                     {
@@ -47,8 +62,8 @@ const datasets = () => {
                             ?
                             (
                                 <div className="dataset mid-width margin-top">
-                                    <input type="number" className="quarter-width" value={x[index]} onChange={(e) => setX([...x.slice(0, index), parseFloat(e.target.value), ...x.slice(index+1, x.length)])}/>
-                                    <input type="number" className="quarter-width" value={y[index]} onChange={(e) => setY([...y.slice(0, index), parseFloat(e.target.value), ...y.slice(index+1, y.length)])}/>
+                                    <input type="number" className="quarter-width" key={`X${index}`} value={x[index]} onChange={(e) => setX([...x.slice(0, index), parseFloat(e.target.value), ...x.slice(index+1, x.length)])}/>
+                                    <input type="number" className="quarter-width" key={`Y${index}`} value={y[index]} onChange={(e) => setY([...y.slice(0, index), parseFloat(e.target.value), ...y.slice(index+1, y.length)])}/>
                                     <p style={{minWidth: 35}}></p>
                                 </div>
                             )
@@ -64,11 +79,9 @@ const datasets = () => {
                 </div>
             </div>
 
-            <NavigateForward route="/">
-                <button className="next-button large button-primary-outline">Next <span className="material-icons">arrow_forward</span></button>
-            </NavigateForward>
+            <button className="next-button large button-secondary-outline" onClick={() => handleAddData()} >Create Regression</button>
         </motion.div>
     )
 }
 
-export default datasets;
+export default Datasets;
