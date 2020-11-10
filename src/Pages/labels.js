@@ -3,25 +3,37 @@ import { motion } from 'framer-motion';
 import React, { useEffect, useState } from 'react';
 
 import NavigateBack from '../Components/NavigateBack';
+import Notification from '../Components/Notification';
 import { useHistory } from 'react-router-dom';
 
 import { useDispatch } from 'react-redux';
 import { addLabelX, addLabelY } from '../redux/actions/actions';
+
 
 const labels = () => {
     const history = useHistory();
     const dispatch = useDispatch();
     const [labelX, setX] = useState('');
     const [labelY, setY] = useState('');
+    
+    const [notification, setNotification] = useState(0);
 
     useEffect(() => {
-
-    }, [labelX, labelY]);
+    }, [labelX, labelY, notification]);
 
     const handleAddLabels = () => {
-        dispatch(addLabelX(labelX));
-        dispatch(addLabelY(labelY));
-        history.push('/datasets');
+        let isValid = false;
+        const type = -1;
+        let message = '';
+        if (labelX === '' || labelY === '') message = 'ERROR. No field can be left empty.';
+        else isValid = true;
+
+        if (isValid) {
+            dispatch(addLabelX(labelX));
+            dispatch(addLabelY(labelY));
+            history.push('/datasets');
+        }
+        else setNotification({type, message});
     }
 
     return(
@@ -33,6 +45,13 @@ const labels = () => {
                 <span className="material-icons clickable back-button">arrow_back</span>
             </NavigateBack>
             <p className="header bold">Name your variables</p>
+            {
+                notification !== 0
+                ?
+                <Notification type={notification.type} message={notification.message} />
+                :
+                null
+            }
             <div className="input-field">
                 <p className="subheader bold">Independent variable (X-axis)</p>
                 <input type="text" value={labelX} onChange={(e) => setX(e.target.value)} />

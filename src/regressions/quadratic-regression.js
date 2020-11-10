@@ -34,7 +34,9 @@ export const getRegression = (x, y) => {
     X_sorted.sort((a, b) => a - b);
     console.log(X_sorted)
     let x_new = [];
-    for (let i = X_sorted[0]; i <= X_sorted[X_sorted.length -1]; i+=(parseInt(x.length*.6))) x_new.push(i);
+    let epsilon = (1/(math.abs(X_sorted[X_sorted.length - 1] - X_sorted[0])))
+    if (X_sorted.length > 10 || X_sorted[0] > 100) epsilon = 0.2
+    for (let i = X_sorted[0]; i <= X_sorted[X_sorted.length -1]; i+=(parseInt( (X_sorted[X_sorted.length -1] - X_sorted[0]) * epsilon))) x_new.push(i);
     
     //Calculate new Y
     let Y_new = [];

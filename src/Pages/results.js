@@ -15,8 +15,10 @@ import {
 //Regressions
 import * as linearR from '../regressions/linear-regression';
 import * as quadraticR from '../regressions/quadratic-regression';
+import * as exponentialR from '../regressions/exponential-regression';
 
 import RegressionChart from '../Components/RegressionChart';
+import Navbar from '../Components/Navbar';
 
 const Results = () => {
     const dispatch = useDispatch();
@@ -53,6 +55,10 @@ const Results = () => {
         dispatch(addQuadraticRegression(result));
         setQuadratic(result);
 
+        result = exponentialR.getRegression(x, y);
+        dispatch(addExponentialRegression(result));
+        setExponential(result);
+
         setDone(true);
     }
 
@@ -65,7 +71,8 @@ const Results = () => {
             {
                 regressionsDone
                 ?
-                <div>
+                <div className="fullscreen">
+                    <Navbar />
                     <RegressionChart
                     scatterData={scatterData}
                     labelX={labelX} labelY={labelY}
@@ -76,6 +83,11 @@ const Results = () => {
                     labelX={labelX} labelY={labelY}
                     regression={quadratic}
                     regressionName="Quadratic regression" />
+                    <RegressionChart
+                    scatterData={scatterData}
+                    labelX={labelX} labelY={labelY}
+                    regression={exponential}
+                    regressionName="Exponential regression" />
                 </div>
                 :
                 null

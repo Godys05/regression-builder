@@ -60,3 +60,33 @@
     }
 }
 
+.button-error-outline {
+    @extend %button;
+    @extend %button-outline;
+    color: $error-color;
+    border-color: $error-color;
+    transition: all 0.3s ease-out;
+
+    &:hover {
+        background-color: $error-color;
+        color: $font-secondary-color;
+        box-shadow: 0px 0px 12px rgba($color: $error-color, $alpha: 0.3);
+    }
+    &:active {
+        border: none;
+        background-color: rgba($color: $error-color, $alpha: 0.6);
+        color: $font-secondary-color;
+    }
+}
+
+@media screen and (max-width: 600px) {
+    .button-large {
+            height: 5vh;
+    }
+}
+
+@media screen and (max-width: 1024px) {
+    .button-large {
+            height: 5vh;
+    }
+}

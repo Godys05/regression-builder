@@ -13,9 +13,9 @@
 .next-button {
     position: fixed;
     top: 85vh;
-    left: 85vw;
+    left: 80vw;
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
     transition: all 1s ease-out;
 }
@@ -39,6 +39,12 @@
     padding: 2%;
 }
 
+.fullscreen {
+    margin: 0;
+    width: 100%;
+    height: 100%;
+}
+
 canvas {
     width: 100%;
     height: 100%;
@@ -51,6 +57,18 @@ canvas {
         max-width: 40vw;
         max-height: 40vw;
     }
+
+    .parent-section {
+        width: 50vw;
+    }
+    .dataset {
+        width: 100%;
+    }
+
+    .new-regression {
+        font-size: $font-size;
+        margin-right: 3vw;
+    }
 }
 
 @media screen and (max-width: 600px) {
@@ -58,4 +76,32 @@ canvas {
         max-width: 20vw;
         max-height: 20vw;
     }
+
+    .next-button {
+        display: flex;
+        justify-content: center;
+        text-align: center;
+        width: 30vw;
+        height: 10vh;
+        top: 2.5vh;
+        left: 60%;
+    }
+
+    .parent-section {
+        width: 80vw;
+    }
+    .dataset {
+        width: 100%;
+    }
+
+    .new-regression {
+        font-size: $font-size;
+        margin-right: 10vw;
+        font-weight: 400;
+        min-height: 10vh;
+    }
+}
+
+.notification--error {
+    color: $error-color;
 }

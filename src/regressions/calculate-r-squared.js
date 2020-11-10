@@ -23,8 +23,8 @@ export const getRSquared = (x_data, y_data, y_hat_data) => {
     y_difference = math.matrix(y_difference);
     y_hat_difference = math.matrix(y_hat_difference);
 
-    const y_sum = math.sum(y_difference);
-    const y_hat_sum = math.sum(y_hat_difference);
+    const y_sum = math.sum(y_squared_difference);
+    const y_hat_sum = math.sum(y_hat_squared_difference);
 
     //Get R squared
     const r_squared = (y_hat_sum / y_sum);

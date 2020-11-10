@@ -97,6 +97,7 @@ const RegressionChart = ({scatterData, labelX, labelY, regression, regressionNam
                 }
             }
         });
+        chart.render();
     }
 
     useEffect(() => {

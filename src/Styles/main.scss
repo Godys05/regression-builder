@@ -17,13 +17,16 @@
 //main config
 body {
     background-color: $primary-color;
-    width: 100%;
+    width: 100vw;
     height: 100%;
+    margin-left: 0px;
+    margin-right: 0px;
+    margin-bottom: 0px;
+    margin-top: 0px;
 }
 
 html {
     @include font;
     overflow-x: hidden;
-    margin: 0;
-    padding: 0;
+    overflow-y: auto;
 }

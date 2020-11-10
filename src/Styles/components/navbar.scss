@@ -1,0 +1,22 @@
+.navbar {
+    position: fixed;
+    top: 0;
+    background-color: $secondary-color;
+    border-bottom: 2px solid rgba($font-secondary-color, 0.5);
+    box-shadow: 3px 3px 12px 5px rgba(47, 43, 77, 0.2);
+    margin: 0;
+    height: 10vh;
+    width: 95vw;
+    max-height: 15vh;
+    padding-left: 2em;
+    padding-right: 2em;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.navbar > button {
+    min-height: 5vh;
+    max-height: 8vh;
+
+}
