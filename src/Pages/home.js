@@ -17,6 +17,9 @@ const Home = () => {
                     <button className="button-large  button-primary-outline">Begin!</button>
                 </NavigateFordward>
             </section>
+            <div className="credits">
+                <p>Made by  <a href="https://github.com/Godys05"> Abner Silva</a> </p>
+            </div>
         </motion.div>
     )
 };
