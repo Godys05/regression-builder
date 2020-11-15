@@ -27,6 +27,6 @@ export const getRSquared = (x_data, y_data, y_hat_data) => {
     const y_hat_sum = math.sum(y_hat_squared_difference);
 
     //Get R squared
-    const r_squared = (y_hat_sum / y_sum);
+    const r_squared = (y_hat_sum / y_sum).toFixed(3) ;
     return r_squared;
 }

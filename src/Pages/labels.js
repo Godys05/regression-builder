@@ -1,6 +1,6 @@
 /* eslint-disable react-hooks/rules-of-hooks */
 import { motion } from 'framer-motion';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 
 import NavigateBack from '../Components/NavigateBack';
 import Notification from '../Components/Notification';
@@ -15,8 +15,22 @@ const labels = () => {
     const dispatch = useDispatch();
     const [labelX, setX] = useState('');
     const [labelY, setY] = useState('');
+    const nextButtonRef = useRef(null);
     
     const [notification, setNotification] = useState(0);
+
+    const handleFocus = () => {
+
+        if (window.innerWidth <= 600) {
+            nextButtonRef.current.style.display = 'none';
+        }
+    }
+
+    const handleFocusOut = () => {
+        if (window.innerWidth <= 600) {
+            nextButtonRef.current.style.display = 'flex';
+        }
+    }
 
     useEffect(() => {
     }, [labelX, labelY, notification]);
@@ -54,15 +68,15 @@ const labels = () => {
             }
             <div className="input-field">
                 <p className="subheader bold">Independent variable (X-axis)</p>
-                <input type="text" value={labelX} onChange={(e) => setX(e.target.value)} />
+                <input type="text" value={labelX} onFocus={() => handleFocus()} onBlur={() => handleFocusOut()} onChange={(e) => setX(e.target.value)} />
             </div>
 
             <div className="input-field">
                 <p className="subheader bold">Dependent variable (Y-axis)</p>
-                <input type="text" value={labelY} onChange={(e) => setY(e.target.value)} />
+                <input type="text" value={labelY} onFocus={() => handleFocus()} onBlur={() => handleFocusOut()} onChange={(e) => setY(e.target.value)} />
             </div>
 
-            <button className="next-button large button-primary-outline" onClick={() => handleAddLabels()} >Next <span className="material-icons">arrow_forward</span></button>
+            <button ref={nextButtonRef} className="next-button large button-primary-outline" onClick={() => handleAddLabels()} >Next <span className="material-icons">arrow_forward</span></button>
         </motion.div>
     )
 }

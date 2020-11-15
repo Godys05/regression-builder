@@ -30,3 +30,47 @@ input {
 input[type=number]::-webkit-inner-spin-button {
     -webkit-appearance: none;
 }
+
+@media screen and (max-width: 600px) {
+    input {
+        min-height: 8vh;
+    }
+}
+
+::-webkit-input-placeholder { color: $font-primary-color; opacity: 1; }
+
+/* Firefox < 19 */
+:-moz-placeholder { color: $font-primary-color; opacity: 1; }
+
+/* Firefox > 19 */
+::-moz-placeholder { color: $font-primary-color; opacity: 1; }
+
+/* Internet Explorer 10 */
+:-ms-input-placeholder { color: $font-primary-color; opacity: 1; }
+
+input:focus::-webkit-input-placeholder {
+    color: $font-primary-color;
+    opacity: 0.2;
+}
+
+input:focus::-moz-placeholder {
+    color: $font-primary-color;
+    opacity: 0.2;
+}
+
+input:focus::-moz-placeholder {
+    color: $font-primary-color;
+    opacity: 0.2;
+}
+
+input:focus:-ms-input-placeholder {
+    color: $font-primary-color;
+    opacity: 0.2;
+}
+
+
+@media screen and (max-width: 600px) {
+    input {
+        height: 3vh;
+    }
+}

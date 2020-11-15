@@ -20,8 +20,13 @@
     color: $accent-color-1;
 }
 
+button {
+    outline: none; 
+}
+
 .button-large {
     min-width: 15vw;
+    width: auto;
     height: 15vh;
 }
 
@@ -80,8 +85,23 @@
 }
 
 @media screen and (max-width: 600px) {
+
+    #add, #delete {
+        display: flex;
+        align-items: center;
+        min-height: 8vh;
+        max-height: 8vh;
+        height: 8vh;
+    }
+
     .button-large {
-            height: 5vh;
+            height: 3vh;
+    }
+
+    .button-secondary-outline.next-button{
+        background-color: rgba($color: $accent-color-2, $alpha: 1);
+        color: $font-secondary-color;
+        border: none;
     }
 }
 

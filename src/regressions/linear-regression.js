@@ -32,10 +32,10 @@ export const getRegression = (x, y) => {
     let x_squared_sum = math.sum(x_squared);
     let x_times_y_sum = math.sum(x_times_y);
 
-    let slope = x_times_y_sum / x_squared_sum;
+    let slope = (x_times_y_sum / x_squared_sum);
 
     //Calculate intersection with y axis when x = 0
-    let b = mean_y - (slope * mean_x);
+    let b = (mean_y - (slope * mean_x));
 
     let x_new = [...x];
     x_new.sort();
@@ -44,18 +44,19 @@ export const getRegression = (x, y) => {
     let y_new_sorted = [];
     let y_new = []
     for (let i = 0; i < x_new.length; i++) {
-        y_new.push(b + ( slope * x[i] ))
-        y_new_sorted.push(b + ( slope * x_new[i] ));
+        y_new.push(parseFloat(b + ( slope * x[i] )))
+        y_new_sorted.push(parseFloat(b + ( slope * x_new[i] )));
     }
 
     //Get R squared
+    console.log(x, y, y_new)
     const r_squared = getRSquared(x, y, y_new);
     //format data
     const regression = {
-        a: b,
-        b: slope,
+        a: parseFloat(b).toFixed(3),
+        b: parseFloat(slope).toFixed(3),
         r_squared,
-        formula: `${b} + ${slope}x`
+        formula: `${parseFloat(b).toFixed(3)} + ${parseFloat(slope).toFixed(3)}x`
     };
 
     regression.dataset = y_new_sorted.map((currentY, index) => {

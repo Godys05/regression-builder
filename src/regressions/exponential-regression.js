@@ -32,13 +32,13 @@ export const getRegression = (x, y) => {
     w_matrix = math.multiply(w_matrix, y_matrix);
 
     //Get a and b
-    const a = math.e ** math.subset(w_matrix, math.index(0, 0));
-    const b = math.subset(w_matrix, math.index(1, 0));
+    const a = (math.e ** math.subset(w_matrix, math.index(0, 0))).toFixed(3);
+    const b = (math.subset(w_matrix, math.index(1, 0))).toFixed(3);
 
     //Calculate Y hat values
     let y_hat = [];
     for (let i = 0; i < x_sorted.length; i++) {
-        y_hat.push( a * (math.e ** (b * x[i]) ) );
+        y_hat.push( parseFloat(a * (math.e ** (b * x[i]) )) );
     }
      
     //Calculate values for plotting
@@ -47,9 +47,9 @@ export const getRegression = (x, y) => {
     let epsilon = (1 / math.abs(x_sorted[x_sorted.length - 1] - x_sorted[0]));
     let counter = 0;
     if (x_sorted.length > 10 || x_sorted[x_sorted.length - 1] > 100) epsilon = 0.2
-    for (let i = x_sorted[0]; i <= x_sorted[x_sorted.length - 1]; i += parseInt(math.abs(x_sorted[x_sorted.length - 1] - x_sorted[0])*epsilon)) {
+    for (let i = x_sorted[0]; i <= x_sorted[x_sorted.length - 1]; i += parseFloat(math.abs(x_sorted[x_sorted.length - 1] - x_sorted[0])*epsilon)) {
         x_plot.push(i);
-        y_plot.push( a * (math.e ** (b * x_plot[counter]) ) );
+        y_plot.push( parseFloat(a * (math.e ** (b * x_plot[counter]) )) );
         counter++;
     }
 

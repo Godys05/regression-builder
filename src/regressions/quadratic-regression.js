@@ -44,7 +44,7 @@ export const getRegression = (x, y) => {
     for (let i = 0; i < x_new.length; i++) {
         let currentY = 0
         for (let j = 0; j < (base + 1); j++) {
-            currentY += (W._data[j] * (x_new[i] ** j));
+            currentY += parseFloat(W._data[j] * (x_new[i] ** j));
         }
         Y_new_sorted.push(currentY);
     }
@@ -52,7 +52,7 @@ export const getRegression = (x, y) => {
     for (let i = 0; i < x.length; i++) {
         let currentY = 0
         for (let j = 0; j < (base + 1); j++) {
-            currentY += (W._data[j] * (x[i] ** j));
+            currentY += parseFloat(W._data[j] * (x[i] ** j));
         }
         console.log('CURRENT NEW Y sorted')
         Y_new.push(currentY);
@@ -61,11 +61,11 @@ export const getRegression = (x, y) => {
     let r_squared = getRSquared(x, y, Y_new);
     
     const regression = {
-        a: W._data[2],
-        b: W._data[1],
-        c: W._data[0],
+        a: parseFloat(W._data[2]).toFixed(3),
+        b: parseFloat(W._data[1]).toFixed(3),
+        c: parseFloat(W._data[0]).toFixed(3),
         r_squared,
-        formula: `${W._data[2]}x^2 + ${W._data[1]}x + ${W._data[0]}`
+        formula: `${parseFloat(W._data[2]).toFixed(3)}x^2 + ${parseFloat(W._data[1]).toFixed(3)}x + ${parseFloat(W._data[0]).toFixed(3)}`
     }
 
     regression.dataset = Y_new_sorted.map((currentY, index) => {

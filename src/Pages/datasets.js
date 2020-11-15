@@ -13,6 +13,8 @@ import { addX, addY } from '../redux/actions/actions';
 const Datasets = () => {
     const history = useHistory();
     const dispatch = useDispatch();
+    const oldSize = useRef(null);
+    const nextButtonRef = useRef(null);
 
     const labelX = useSelector(state => state.datasetReducer.labelX);
     const labelY = useSelector(state => state.datasetReducer.labelY);
@@ -49,16 +51,39 @@ const Datasets = () => {
         const type = -1;
         let isValid = false;
         let message = '';
-        if (x.length < 4) message = 'ERROR. Your dataset must be at least 4 pair length.';
-        else if (x.filter((currentX, index) => x.indexOf(currentX) !== index).length !== 0) message = 'ERROR. You cannot repeat X values as they would not be a function.';
+        if (x.length < 8) message = 'Your dataset must be at least 8 pair length.';
+        else if (x.filter((currentX, index) => x.indexOf(currentX) !== index).length !== 0) message = 'You cannot repeat X values as they would not be a function.';
         else isValid = true
 
         if (!isValid) setNotification({type, message});
-        else return true;
+        else {
+            setNotification(0)
+            return true;
+        }
+    }
+
+    const handleFocus = () => {
+
+        if (window.innerWidth <= 600) {
+            nextButtonRef.current.style.display = 'none';
+            window.scrollTo(0, window.innerHeight)
+        }
+    }
+
+    const handleFocusOut = () => {
+        if (window.innerWidth <= 600) {
+            nextButtonRef.current.style.display = 'flex';
+            window.scrollTo(0, window.innerHeight)
+        }
     }
 
     useEffect(() => {
-        window.scrollTo(0, window.innerHeight);
+        handleValidation()
+        if (oldSize.current === null) oldSize.current = x.length;
+        if (oldSize.current !== x.length) {
+            window.scrollTo(0, window.innerHeight);
+            oldSize.current = x.length;
+        }
         console.log(x, y)
     }, [x, y])
 
@@ -85,9 +110,9 @@ const Datasets = () => {
                             ?
                             (
                                 <div className="dataset mid-width margin-top">
-                                    <input type="number" className="quarter-width" key={`X${index}`} value={x[index]} onChange={(e) => setX([...x.slice(0, index), parseFloat(e.target.value), ...x.slice(index+1, x.length)])}/>
-                                    <input type="number" className="quarter-width" key={`Y${index}`} value={y[index]} onChange={(e) => setY([...y.slice(0, index), parseFloat(e.target.value), ...y.slice(index+1, y.length)])}/>
-                                    <button className="add button-error-outline" style={{minWidth: 30}} onClick={() => onRemoveData(index)}><span className="material-icons" >close</span></button>
+                                    <input type="number" className="quarter-width" key={`X${index}`} placeholder={x[index]} onFocus={() => handleFocus()} onBlur={() => handleFocusOut()} onChange={(e) => setX([...x.slice(0, index), isNaN(parseFloat(e.target.value)) ? 0 : parseFloat(e.target.value), ...x.slice(index+1, x.length)])}/>
+                                    <input type="number" className="quarter-width" key={`Y${index}`} placeholder={y[index]} onFocus={() => handleFocus()} onBlur={() => handleFocusOut()} onChange={(e) => setY([...y.slice(0, index), isNaN(parseFloat(e.target.value)) ? 0 : parseFloat(e.target.value), ...y.slice(index+1, y.length)])}/>
+                                    <button id="delete" className="add button-error-outline" style={{minWidth: 30}} onClick={() => onRemoveData(index)}><span className="material-icons" >close</span></button>
                                 </div>
                             )
                             :
@@ -96,17 +121,19 @@ const Datasets = () => {
                     }
 
                 <div className="dataset mid-width margin-top">
-                    <input ref={lastX} type="number" className="quarter-width" placeholder={x[x.length - 1]} onChange={(e) => setX([...x.slice(0, x.length - 1), parseFloat(e.target.value)])} />
-                    <input ref={lastY} type="number" className="quarter-width" placeholder={y[y.length - 1]} onChange={(e) => setY([...y.slice(0, y.length - 1), parseFloat(e.target.value)])} />
-                    <button className="add button-secondary-outline" style={{minWidth: 30}} onClick={() => onAddData()}><span className="material-icons" >add</span></button>
+                    <input ref={lastX} type="number" className="quarter-width" placeholder={x[x.length - 1]} onFocus={() => handleFocus()} onBlur={() => handleFocusOut()} onChange={(e) => setX([...x.slice(0, x.length - 1), isNaN(parseFloat(e.target.value)) ? 0 : parseFloat(e.target.value)])} />
+                    <input ref={lastY} type="number" className="quarter-width" placeholder={y[y.length - 1]} onFocus={() => handleFocus()} onBlur={() => handleFocusOut()} onChange={(e) => setY([...y.slice(0, y.length - 1), isNaN(parseFloat(e.target.value)) ? 0 : parseFloat(e.target.value)])} />
+                    <button id="add" className="add button-secondary-outline" style={{minWidth: 30}} onClick={() => onAddData()}><span className="material-icons" >add</span></button>
                 </div>
             </div>
 
-            <button className="next-button large button-secondary-outline" onClick={() => handleAddData()} >Create!</button>
+            <button ref={nextButtonRef} className="next-button large button-secondary-outline" onClick={() => handleAddData()} >Create!</button>
             {
                 notification !== 0
                 ?
-                <Notification type={notification.type} message={notification.message} />
+                <div>
+                    <Notification type={notification.type} message={notification.message} />
+                </div>
                 :
                 null
             }
