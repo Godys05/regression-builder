@@ -19,6 +19,7 @@ import * as exponentialR from '../regressions/exponential-regression';
 
 import RegressionChart from '../Components/RegressionChart';
 import Navbar from '../Components/Navbar';
+import { pow } from 'mathjs';
 
 const Results = () => {
     const dispatch = useDispatch();
@@ -55,7 +56,10 @@ const Results = () => {
         dispatch(addQuadraticRegression(result));
         setQuadratic(result);
 
-        result = exponentialR.getRegression(x, y);
+        const x_fixed = x.map(currentX => currentX === 0 ? 0.00000001 : parseFloat(currentX));
+        const y_fixed = y.map(currentY => currentY=== 0 ? 0.00000001 : parseFloat(currentY));
+
+        result = exponentialR.getRegression(x_fixed, y_fixed);
         dispatch(addExponentialRegression(result));
         setExponential(result);
 

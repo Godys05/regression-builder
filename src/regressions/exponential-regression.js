@@ -3,6 +3,7 @@ import { getRSquared } from './calculate-r-squared';
 
 
 export const getRegression = (x, y) => {
+    console.log(x)
     let x_sorted = [...x];
     x_sorted.sort((a, b) => a-b);
     //Get X and Y
